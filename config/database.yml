@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+development:
+  <<: *default
+  database: fyp_development
+  host: localhost
+  port: 5432
+  username: postgres
+  password: password
+test:
+  <<: *default
+  database: fyp_test
+  host: localhost
+  port: 5432
+  username: postgres
+  password: password
+production:
+  <<: *default
+  database: fyp_production
+  host: localhost
+  port: 5432
