@@ -1,5 +1,21 @@
-<% if user_signed_in? %>
-  <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
-<% else %>
-  <a class="nav-link" href="<%= new_user_session_path %>" data-method="delete">Sign in</a>
-<% end %>
+<div class="container my-5">
+  <div class="py-5 px-3 px-lg-5 text-center bg-white border rounded-3">
+    <h1 class="text-body-emphasis">FYP</h1>
+    <p class="col-lg-8 mx-auto fs-5 text-muted">
+      This is a very good FYP
+    </p>
+    <div class="d-inline-flex gap-2">
+      <% if user_signed_in? %>
+        <% if current_user&.role === "admin" %>
+          <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/allusers">All Users</a>
+        <% else %>
+          <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/users/edit">Update User</a>
+        <% end %>
+        <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+      <% else %>
+        <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="<%= new_user_session_path %>">Sign in</a>
+        <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill" href="<%= new_user_registration_path %>">Sign up</a>
+      <% end %>
+    </div>
+  </div>
+</div>

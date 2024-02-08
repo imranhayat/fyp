@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
    }
 
+   get '/allusers', to: 'home#allusers'
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
