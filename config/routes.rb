@@ -13,7 +13,13 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
    }
 
-   get '/allusers', to: 'home#allusers'
+  authenticated :user, lambda {|user| user.admin? } do
+    get '/allusers', to: 'admin#allusers'
+    get 'approve_user/:id', to: 'admin#approve_user', as: :approve_user
+    get 'reject_user/:id', to: 'admin#reject_user', as: :reject_user
+  end
+
+  patch 'update', to: 'users#update', as: :update_profile
 
   get "up" => "rails/health#show", as: :rails_health_check
 

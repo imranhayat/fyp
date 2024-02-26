@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -11,14 +10,14 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     login_param = params[:user][:user_account]
-    user = if login_param.include?('@') # Check if the input contains '@', assuming it's an email
+    @user = if login_param.include?('@') # Check if the input contains '@', assuming it's an email
              User.find_for_database_authentication(email: login_param)
            else
              User.find_for_database_authentication(username: login_param)
            end
 
-    if user && user.valid_password?(params[:user][:password])
-      sign_in(user)
+    if @user && @user.valid_password?(params[:user][:password]) && is_restricted_account?
+      sign_in(@user)
       redirect_to root_path # Customize the redirect path as needed
     else
       flash.now[:alert] = 'Invalid email/username or password'
@@ -37,4 +36,12 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  private
+
+    def is_restricted_account?
+      return true if @user.approved
+      flash.now[:alert] = "Your account can not be approved by admin!"
+      false # redirect_to(root_path, alert: "Your account can not be approved by admin!") and return
+    end
 end

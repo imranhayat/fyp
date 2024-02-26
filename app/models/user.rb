@@ -5,9 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: [:user, :admin]
+  enum vehicle_type: [:bike, :car]
 
   validates :email, uniqueness: true, format: { with: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/, message: "is invalid format" }
   validates :username, uniqueness: true
+  
+  has_one_attached :picture, dependent: :destroy
+  has_one_attached :fitness_certificate, dependent: :destroy
 
   before_create :set_username!
 

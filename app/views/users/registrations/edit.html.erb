@@ -29,6 +29,11 @@
         <%= f.text_field :address, class:"form-control", required: true %>
       </div>
 
+      <div class="mb-3">
+        <%= f.label :current_password, class:"form-label" %><br />
+        <%= f.password_field :current_password, class:"form-control", required: true %>
+      </div>
+
       <div class="d-flex align-items-center gap-2">
         <%= f.submit "Update", class:'btn btn-primary' %>
       </div>

@@ -1,0 +1,39 @@
+<div class="container-xl py-4">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Username</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @users.present? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="align-middle"><%= user.first_name %></td>
+            <td class="align-middle"><%= user.last_name %></td>
+            <td class="align-middle"><%= user.email %></td>
+            <td class="align-middle"><%= user.username %></td>
+            <td class="align-middle"><%= user.phone_number %></td>
+            <td class="align-middle"><%= user.address %></td>
+            <td>
+              <% unless user.approved %>
+                <a href="<%= approve_user_path(user)%>" class="btn btn-primary" data-remote="true">Approve</a>
+              <% else %>
+               <a href="<%= reject_user_path(user)%>" class="btn btn-secondary" data-remote="true">Reject</a>
+              <% end %>
+            </td>
+          </tr>
+        <%end%>
+      <% else %>
+        <p>No Users were exists.</p>
+      <% end %>
+    </tbody>
+
+  </table>
+</div>
