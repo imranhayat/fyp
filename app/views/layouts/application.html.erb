@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fyp</title>
+    <title>Driving School Portal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,6 +12,23 @@
   </head>
 
   <body class="bg-body-tertiary">
+    <% if notice or alert.present? or flash[:warning] or flash[:info].present? %>
+      <div class="toast-container position-fixed top-45 end-0 p-3">
+        <div class="toast show align-items-center text-bg-<%= notice ? 'primary' : 'danger' %> border-0">
+          <div class="d-flex">
+            <div class="toast-body">
+              <% if notice %>
+                <%= notice.html_safe %>
+              <% end %>
+              <% if alert.present? %>
+                <%= alert.html_safe %>
+              <% end %>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <%= render 'layouts/header' %>
     <%= yield %>
   </body>

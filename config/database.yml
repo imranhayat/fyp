@@ -8,15 +8,15 @@ development:
   database: fyp_development
   host: localhost
   port: 5432
-  username: junaid
-  password: junaid
+  username: postgres
+  password: password
 test:
   <<: *default
   database: fyp_test
   host: localhost
   port: 5432
-  username: junaid
-  password: junaid
+  username: postgres
+  password: password
 production:
   <<: *default
   database: fyp_production

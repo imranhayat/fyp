@@ -9,10 +9,12 @@
 #   end
 
 admin = User.create(
+  username: "admin",
   email: "admin@test.com",
   password: "admin123",
   password_confirmation: "admin123", 
-  role: "admin"
+  role: "admin",
+  approved: true
 )
 
 puts "*** Admin with email: #{admin.email} created! ***"; puts
