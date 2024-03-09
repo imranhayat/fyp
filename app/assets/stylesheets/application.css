@@ -25,3 +25,8 @@
 .top-45{
   top: 45px;
 }
+
+.custom-image{
+  max-width: 150px;
+  max-height: 150px;
+}

@@ -10,6 +10,8 @@
           <th scope="col">Username</th>
           <th scope="col">Phone number</th>
           <th scope="col">Address</th>
+          <th scope="col">Picture</th>
+          <th scope="col">Fitness Certificate</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -22,7 +24,9 @@
             <td class="align-middle"><%= user.username %></td>
             <td class="align-middle"><%= user.phone_number %></td>
             <td class="align-middle"><%= user.address %></td>
-            <td>
+            <td class="align-middle"><img src="<%=  url_for(user.picture) %>" class="custom-image"  /></td>
+            <td class="align-middle"><img src="<%=  url_for(user.fitness_certificate) %>" class="custom-image" /></td>
+            <td class="align-middle">
               <% unless user.approved %>
                 <a href="<%= approve_user_path(user)%>" class="btn btn-primary" data-remote="true">Approve</a>
               <% else %>
