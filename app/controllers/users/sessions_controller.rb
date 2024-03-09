@@ -47,7 +47,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
     def is_restricted_account?
-      return true if @user.approved
+      return true if @user.approved || @user.admin?
       flash.now[:alert] = "Your account is not approved by admin yet."
       false # redirect_to(root_path, alert: "Your account can not be approved by admin!") and return
     end

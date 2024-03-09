@@ -4,6 +4,7 @@ class AdminController < ApplicationController
 
   def approve_user
     @user.update!(approved: true)
+    BasicMailer.confirmation_email(@user).deliver
     redirect_to request.referrer
   end
 
