@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+.form-signin {
+  max-width: 500px;
+  padding: 1.5rem;
+}
+
+.min-vh-100-header{
+  min-height: calc(100vh - 64px)
+}
+.top-45{
+  top: 45px;
+}
+
+.custom-image{
+  max-width: 150px;
+  max-height: 150px;
+}

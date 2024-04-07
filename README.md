@@ -1,24 +1,28 @@
-# README
+# Driving School Portal
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The project involves creating an online booking platform specifically for driving schools. This application facilitate the driving schools and its instructors to register under one platform and fasciculate a common person to choose driving school according to his preference (Particular instructor and location)
 
-Things you may want to cover:
+-  Ruby 3.2.2
+-  Rails 7.1.3
 
-* Ruby version
+## System dependencies
 
-* System dependencies
+- ruby
+- rails
+- postgres
 
-* Configuration
+## Install Gems
 
-* Database creation
+- `bundle install`
 
-* Database initialization
+## Database creation
 
-* How to run the test suite
+Change your postgres configuration in database.yml
 
-* Services (job queues, cache servers, search engines, etc.)
+- `rails db:create`
+- `rails db:migrate`
+- `rails db:seed`
 
-* Deployment instructions
+## Running Project locally
 
-* ...
+- Run `rails s` and go to localhost:3000
