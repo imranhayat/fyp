@@ -7,6 +7,15 @@ Rails.application.routes.draw do
 
   root to: "home#home"
 
+  get '/learners/searchlocation', to: 'learners#searchlocation'
+  get '/learners/allbookings', to: 'learners#allbookings'
+  get '/learners/createbooking', to: 'learners#createbooking'
+  get '/instructors/allbookings', to: 'instructors#allbookings'
+  get '/schools/allbookings', to: 'schools#allbookings'
+  get '/schools/allinstructors', to: 'schools#allinstructors'
+  get '/schools/alllessons', to: 'schools#alllessons'
+  get '/schools/createlesson', to: 'schools#createlesson'
+
   devise_for :users, :controllers => { 
     sessions: 'users/sessions',
     registrations: 'users/registrations',
