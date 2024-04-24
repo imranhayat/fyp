@@ -33,11 +33,12 @@
         <%= f.label :picture, class:"form-label" %>
         <%= f.file_field :picture, class:"form-control", required: true %>
       </div>
-  
-      <div class="mb-3">
-        <%= f.label :fitness_certificate, class:"form-label" %>
-        <%= f.file_field :fitness_certificate, class:"form-control", required: true %>
-      </div>
+      <% if resource.instructor? %>
+        <div class="mb-3">
+          <%= f.label :fitness_certificate, class:"form-label" %>
+          <%= f.file_field :fitness_certificate, class:"form-control", required: true %>
+        </div>
+      <%end%>
 
       <div class="mb-3">
         <%= f.label :current_password, class:"form-label" %><br />

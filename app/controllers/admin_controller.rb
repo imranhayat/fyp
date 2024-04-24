@@ -14,7 +14,8 @@ class AdminController < ApplicationController
   end
 
   def allusers
-    @users = User.all - [current_user]
+    records = current_user.admin? ? User.user : User.instructor
+    @users = records - [current_user]
   end
 
   private

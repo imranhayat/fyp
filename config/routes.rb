@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
    }
 
-  authenticated :user, lambda {|user| user.admin? } do
+  authenticated :user, lambda {|user| user.admin? || user.school? } do
     get '/allusers', to: 'admin#allusers'
     get 'approve_user/:id', to: 'admin#approve_user', as: :approve_user
     get 'reject_user/:id', to: 'admin#reject_user', as: :reject_user

@@ -16,6 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       yield resource if block_given?
+
+      # return sign_in(resource, bypass: true) if resource.user? && resource.approved
+
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up_but_inactive
         expire_data_after_sign_in!
@@ -80,7 +83,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
   
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username, :phone_number, :address, :picture, :fitness_certificate])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username, :phone_number, :address, :picture, :fitness_certificate, :role])
       devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :username, :phone_number, :address, :picture, :fitness_certificate, :vehicle_type])
     end
 
