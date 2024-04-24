@@ -2,44 +2,6 @@
   <h4>Create Booking</h4>
   <%# @schools.each do |school| %>
   <form>
-    <div
-      class="d-flex align-items-center gap-3 border rounded p-3 bg-white mb-3"
-    >
-      <div class="flex-grow-1">
-        <h5>School Name</h5>
-        <div>School Address</div>
-        <div class="d-flex align-items-center gap-2 mt-1 mb-2">
-          <img src="/star-full.svg" width="20" />
-          <div class="fw-bold">4.5</div>
-          <div
-            class="text-decoration-underline text-primary cursor-pointer"
-            data-bs-toggle="modal"
-            data-bs-target="#reviewsModal"
-          >
-            See Reviews
-          </div>
-        </div>
-        <div
-          class="d-flex align-items-center flex-wrap flex-sm-nowrap gap-2 mt-1 mb-2"
-        >
-          <select class="form-select">
-            <option disabled selected>Select Lesson</option>
-            <option value="5">Lesson 1</option>
-            <option value="4">Lesson 2</option>
-          </select>
-          <select class="form-select">
-            <option disabled selected>Select Instructor</option>
-            <option value="5">Instructor 1</option>
-            <option value="4">Instructor 2</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <input type="submit" value="Book" class="btn btn-primary" />
-      </div>
-    </div>
-  </form>
-  <form>
     <div class="d-flex align-items-center gap-3 border rounded p-3 bg-white">
       <div class="flex-grow-1">
         <h5>School Name</h5>
@@ -107,16 +69,14 @@
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s
             <div class="fw-bold mt-1">Imran Hayat</div>
-          </div>
-          <div class="border-bottom mb-2 pb-1">
-            <div class="d-flex align-items-center gap-2 mt-1 mb-1">
-              <img src="/star-full.svg" width="20" />
-              <div class="fw-bold">4.5</div>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <div class="fw-bold">Lesson:</div>
+              <div>Instructor Name</div>
             </div>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-            <div class="fw-bold mt-1">Imran Hayat</div>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <div class="fw-bold">Instructor:</div>
+              <div>Instructor Name</div>
+            </div>
           </div>
           <%# end %> <%# else %>
           <div>No reviews currently exists.</div>
