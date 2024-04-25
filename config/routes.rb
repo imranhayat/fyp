@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/schools/delete_lesson/:lesson_id', to: 'schools#delete_lesson'
   get 'update_booking_status/:id', to: 'learners#update_booking_status', as: :update_booking_status
 
+  post '/learners/add_review/:lesson_id', to: 'learners#add_review'
+
   devise_for :users, :controllers => { 
     sessions: 'users/sessions',
     registrations: 'users/registrations',

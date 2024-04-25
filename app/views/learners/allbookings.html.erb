@@ -41,7 +41,7 @@
           </td>
           <td class="align-middle">
             <div class="d-flex align-items-center flex-wrap gap-2">
-              <% if (booking.status == 'cancelled' || booking.status == 'completed') %>
+              <% if (booking.status == 'completed' && !booking.is_review_exist?) %>
                 <a
                   class="btn btn-primary"
                   data-bs-toggle="modal"
@@ -51,7 +51,7 @@
                 </a>
                 <%= render 'review_modal', booking: booking %>
 
-              <% elsif (booking.status != 'cancelled') %>
+              <% elsif (["draft", "confirmed"].include? booking.status) %>
                 <a
                   href="<%= update_booking_status_path(booking.id, status: "cancelled")%>"
                   class="btn btn-danger"

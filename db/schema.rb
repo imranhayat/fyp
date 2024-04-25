@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_182653) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_095048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_182653) do
     t.index ["school_id"], name: "index_lessons_on_school_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating", default: 0
+    t.string "feedback"
+    t.integer "booking_id", null: false
+    t.bigint "customer_id"
+    t.bigint "school_id"
+    t.bigint "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_reviews_on_customer_id"
+    t.index ["lesson_id"], name: "index_reviews_on_lesson_id"
+    t.index ["school_id"], name: "index_reviews_on_school_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -92,4 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_182653) do
   add_foreign_key "bookings", "users", column: "school_id"
   add_foreign_key "lessons", "users", column: "instructor_id"
   add_foreign_key "lessons", "users", column: "school_id"
+  add_foreign_key "reviews", "lessons"
+  add_foreign_key "reviews", "users", column: "customer_id"
+  add_foreign_key "reviews", "users", column: "school_id"
 end

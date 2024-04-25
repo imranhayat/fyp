@@ -1,6 +1,6 @@
 <div class="container-xl py-4">
   <h4>All Bookings</h4>
-  <%# if @bookings.present? %>
+  <% if @bookings.present? %>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -15,7 +15,7 @@
         <% @bookings.each do |booking| %>
         <tr>
           <td class="align-middle">
-            <%= booking.user.first_name %><%= booking.user.last_name %>
+            <%= booking.customer.first_name %><%= booking.customer.last_name %>
           </td>
           <td class="align-middle"><%= booking.lesson.title&.humanize %></td>
           <td class="align-middle">
@@ -45,7 +45,7 @@
       </tbody>
     </table>
   </div>
-  <%# else %>
+  <% else %>
   <div class="bg-white p-4 border rounded">No Booking currently exists.</div>
-  <%# end %>
+  <% end %>
 </div>

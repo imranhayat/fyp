@@ -18,33 +18,24 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">Rate your instructor</label>
-          <select class="star-rating">
-            <option value="">Select a rating</option>
-            <option value="5">Excellent</option>
-            <option value="4">Very Good</option>
-            <option value="3">Average</option>
-            <option value="2">Poor</option>
-            <option value="1">Terrible</option>
-          </select>
+      <%= form_with url: "/learners/add_review/#{booking.lesson.id}", method: :post, remote: true do |f| %>
+        <div class="modal-body">
+          <div class="mb-3">
+            <%= f.label :rating, 'Rate your instructor', class: 'form-label' %>
+            <%= f.select :rating, options_for_select([['Select a rating', ''], ['Excellent', 5], ['Very Good', 4], ['Average', 3], ['Poor', 2], ['Terrible', 1]], selected: nil), {}, {class: 'star-rating form-control'} %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :feedback, 'Write your feedback', class: 'form-label' %>
+            <%= f.text_area :feedback, rows: 3, class: 'form-control' %>
+          </div>
+          <%= f.hidden_field :booking_id, value: booking.id %>
+          <%= f.hidden_field :school_id, value: booking.lesson.school.id %>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Write your feedback</label>
-          <textarea class="form-control" rows="3"></textarea>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <%= f.submit 'Add Review', class: 'btn btn-primary' %>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Cancel
-        </button>
-        <button type="button" class="btn btn-primary">Add Review</button>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

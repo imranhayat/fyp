@@ -38,6 +38,20 @@ class LearnersController < ApplicationController
     end
   end
 
+  def add_review
+    if current_user.user?
+      find_lesson
+      @review = @lesson.reviews.build(rating: params[:rating], feedback: params[:feedback], booking_id: params[:booking_id], customer_id: current_user.id, school_id: params[:school_id])
+      if @review.save!
+        redirect_to request.referer, notice: "Thank you for your review."
+      else
+        redirect_to request.referer, alert: @review.errors.full_messages.join
+      end
+    else
+      redirect_to request.referer, alert: "You can not perform this action!"
+    end
+  end
+
   private
 
     def find_user
@@ -46,6 +60,10 @@ class LearnersController < ApplicationController
 
     def find_booking
       @booking = Booking.find(params[:id])
+    end
+
+    def find_lesson
+      @lesson = Lesson.find(params[:lesson_id])
     end
 
     # def booking_params

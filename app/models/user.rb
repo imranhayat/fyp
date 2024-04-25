@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_many :bookings, class_name: "Booking", foreign_key: "customer_id", dependent: :destroy # customer bookings
   has_many :school_bookings, class_name: "Booking", foreign_key: "school_id", dependent: :destroy # school all bookings
+  has_many :reviews, class_name: "Review", foreign_key: "customer_id", dependent: :destroy # for student
+  has_many :booking_reviews, class_name: "Review", foreign_key: "school_id", dependent: :destroy # for school user
 
   before_create :set_username!
   before_create :set_first_name_and_last_name, if: proc { |obj| obj.school? }
@@ -39,13 +41,19 @@ class User < ApplicationRecord
   end
 
   def set_first_name_and_last_name
-    split_name = name.split(" ")
+    split_name = name&.split(" ")
+    return if split_name.nil?
     self.first_name = split_name[0].join(" ")
     self.last_name = split_name[1..].join(" ")
   end
 
   def full_name
     first_name.to_s + last_name.to_s
+  end
+
+  # only school user can use this method
+  def sum_of_ratings
+    (self.booking_reviews.pluck(:rating).sum / booking_reviews.count.to_f).round(1)
   end
 
   private

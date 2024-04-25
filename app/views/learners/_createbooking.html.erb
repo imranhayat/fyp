@@ -8,7 +8,7 @@
           <div><%= school.address.humanize %></div>
           <div class="d-flex align-items-center gap-2 mt-1 mb-2">
             <img src="/star-full.svg" width="20" />
-            <div class="fw-bold">4.5</div>
+            <div class="fw-bold"><%= school.sum_of_ratings %></div>
             <div
               class="text-decoration-underline text-primary cursor-pointer"
               data-bs-toggle="modal"
@@ -28,8 +28,6 @@
         </div>
       <% end %>
     </div>
-    
-  <% end %>
 
   <!-- Reviews Modal -->
   <div
@@ -51,32 +49,31 @@
           ></button>
         </div>
         <div class="modal-body">
-          <%# if @school.reviews.present? %> <%# @school.reviews.each do
-          |review| %>
-          <div class="border-bottom mb-2 pb-1">
-            <div class="d-flex align-items-center gap-2 mt-1 mb-1">
-              <img src="/star-full.svg" width="20" />
-              <div class="fw-bold">4.5</div>
+          <% if school.booking_reviews.present? %> 
+            <% school.booking_reviews.each do |review| %>
+            <div class="border-bottom mb-2 pb-1">
+              <div class="d-flex align-items-center gap-2 mt-1 mb-1">
+                <img src="/star-full.svg" width="20" />
+                <div class="fw-bold"><%= review.rating.to_f %></div>
+              </div>
+              <%= review.feedback %>
+              <div class="fw-bold mt-1"><%= review.customer.full_name.humanize %></div>
+              <div class="d-flex align-items-center gap-2 mt-1">
+                <div class="fw-bold">Lesson:</div>
+                <div><%= review.lesson.title.humanize %></div>
+              </div>
+              <div class="d-flex align-items-center gap-2 mt-1">
+                <div class="fw-bold">Instructor:</div>
+                <div><%= review.lesson.instructor.full_name.humanize %></div>
+              </div>
             </div>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-            <div class="fw-bold mt-1">Imran Hayat</div>
-            <div class="d-flex align-items-center gap-2 mt-1">
-              <div class="fw-bold">Lesson:</div>
-              <div>Instructor Name</div>
-            </div>
-            <div class="d-flex align-items-center gap-2 mt-1">
-              <div class="fw-bold">Instructor:</div>
-              <div>Instructor Name</div>
-            </div>
-          </div>
-          <%# end %> <%# else %>
-          <div>No reviews currently exists.</div>
-          <%# end %>
+            <% end %> 
+          <% else %>
+            <div>No reviews currently exists.</div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-  <%# end %>
+  <% end %>
 </div>
