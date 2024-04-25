@@ -12,33 +12,36 @@
         </tr>
       </thead>
       <tbody>
-        <%# @bookings.each do |booking| %>
+        <% @bookings.each do |booking| %>
         <tr>
           <td class="align-middle">
-            <%#= booking.user.first_name %><%#= booking.user.last_name %>
+            <%= booking.user.first_name %><%= booking.user.last_name %>
           </td>
-          <td class="align-middle"><%#= booking.lesson.name %></td>
+          <td class="align-middle"><%= booking.lesson.title&.humanize %></td>
           <td class="align-middle">
-            <%#= booking.instructor.first_name %><%#= booking.instructor.last_name
-            %>
+            <%= booking.lesson.instructor.full_name %>
           </td>
           <td class="align-middle">
-            <%#= booking.status %>
+            <% if booking.status == "completed" %>
             <span class="badge rounded-pill py-2 px-3 text-bg-success">
               Completed
             </span>
+            <% elsif booking.status == "cancelled"%>
             <span class="badge rounded-pill py-2 px-3 text-bg-danger">
               Cancelled
             </span>
+            <%elsif booking.status == "draft"%>
             <span class="badge rounded-pill py-2 px-3 text-bg-secondary">
               Draft
             </span>
+            <%elsif booking.status == "confirmed"%>
             <span class="badge rounded-pill py-2 px-3 text-bg-primary">
               Confirmed
             </span>
+            <%end%>
           </td>
         </tr>
-        <%#end%>
+        <%end%>
       </tbody>
     </table>
   </div>

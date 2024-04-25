@@ -1,9 +1,9 @@
 <div class="container-xl py-4">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <h4 class="mb-0">All Lessons</h4>
-    <a href="/schools/createlesson" class="btn btn-primary">Add New Lesson</a>
+    <a data-bs-toggle="modal" data-bs-target="#createLessonModal" class="btn btn-primary">Add New Lesson</a>
   </div>
-  <%# if @lessons.present? %>
+  <% if @lessons.present? %>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -13,19 +13,20 @@
         </tr>
       </thead>
       <tbody>
-        <%# @lessons.each do |lesson| %>
+        <% @lessons.each do |lesson| %>
         <tr>
-          <td class="align-middle"><%#= lesson.name %></td>
+          <td class="align-middle"><%= lesson.title&.humanize %></td>
           <td class="align-middle">
             <div class="d-flex align-items-center flex-wrap gap-2">
               <a
-                href="<%#= edit_lesson_path(lesson)%>"
+                data-bs-toggle="modal" data-bs-target="#updateLessonModal"
                 class="btn btn-primary"
               >
                 Edit
               </a>
               <a
-                href="<%#= delete_lesson_path(lesson)%>"
+                href="<%= "/schools/delete_lesson/#{lesson.id}"%>"
+                data-remote="true"
                 class="btn btn-danger"
               >
                 Delete
@@ -33,11 +34,13 @@
             </div>
           </td>
         </tr>
-        <%#end%>
+        <%= render 'updatelesson', lesson: lesson %>
+        <%end%>
       </tbody>
     </table>
   </div>
-  <%# else %>
+  <% else %>
   <div class="bg-white p-4 border rounded">No lesson currently exists.</div>
-  <%# end %>
+  <% end %>
 </div>
+<%= render 'createlesson' %>

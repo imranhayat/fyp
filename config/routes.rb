@@ -9,12 +9,15 @@ Rails.application.routes.draw do
 
   get '/learners/searchlocation', to: 'learners#searchlocation'
   get '/learners/allbookings', to: 'learners#allbookings'
-  get '/learners/createbooking', to: 'learners#createbooking'
+  get '/learners/createbooking/:school_id', to: 'learners#createbooking'
   get '/instructors/allbookings', to: 'instructors#allbookings'
   get '/schools/allbookings', to: 'schools#allbookings'
   get '/schools/allinstructors', to: 'schools#allinstructors'
   get '/schools/alllessons', to: 'schools#alllessons'
-  get '/schools/createlesson', to: 'schools#createlesson'
+  get '/schools/createlesson/:school_id', to: 'schools#createlesson'
+  post '/schools/edit_lesson/:lesson_id', to: 'schools#edit_lesson'
+  get '/schools/delete_lesson/:lesson_id', to: 'schools#delete_lesson'
+  get 'update_booking_status/:id', to: 'learners#update_booking_status', as: :update_booking_status
 
   devise_for :users, :controllers => { 
     sessions: 'users/sessions',

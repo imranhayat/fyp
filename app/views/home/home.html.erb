@@ -6,8 +6,8 @@
     </p>
     <div class="d-inline-flex gap-2">
       <% if user_signed_in? %>
-        <% if current_user&.role === "admin" %>
-          <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/allusers">All Users</a>
+        <% if ["admin", "school"].include? current_user&.role %>
+          <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/allusers">All <%= current_user.school? ? "Instructors" : "Users" %></a>
         <% else %>
           <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/users/edit">Update User</a>
         <% end %>

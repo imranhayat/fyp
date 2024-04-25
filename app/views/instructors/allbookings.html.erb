@@ -1,6 +1,6 @@
 <div class="container-xl py-4">
   <h4>All Bookings</h4>
-  <%# if @bookings.present? %>
+  <% if @bookings.present? %>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -13,57 +13,69 @@
         </tr>
       </thead>
       <tbody>
-        <%# @bookings.each do |booking| %>
+        <% @bookings.each do |booking| %>
         <tr>
           <td class="align-middle">
-            <%#= booking.user.first_name %><%#= booking.user.last_name %>
+            <%= booking.customer.full_name %>
           </td>
-          <td class="align-middle"><%#= booking.lesson.name %></td>
-          <td class="align-middle"><%#= booking.school.first_name %></td>
+          <td class="align-middle"><%= booking.lesson.title&.humanize %></td>
+          <td class="align-middle"><%= booking.school.full_name.humanize %></td>
           <td class="align-middle">
-            <%#= booking.status %>
-            <span class="badge rounded-pill py-2 px-3 text-bg-success">
-              Completed
-            </span>
-            <span class="badge rounded-pill py-2 px-3 text-bg-danger">
-              Cancelled
-            </span>
-            <span class="badge rounded-pill py-2 px-3 text-bg-secondary">
-              Draft
-            </span>
-            <span class="badge rounded-pill py-2 px-3 text-bg-primary">
-              Confirmed
-            </span>
+            <% if booking.status == "completed" %>
+              <span class="badge rounded-pill py-2 px-3 text-bg-success">
+                Completed
+              </span>
+              <% elsif booking.status == "cancelled"%>
+              <span class="badge rounded-pill py-2 px-3 text-bg-danger">
+                Cancelled
+              </span>
+              <%elsif booking.status == "draft"%>
+              <span class="badge rounded-pill py-2 px-3 text-bg-secondary">
+                Draft
+              </span>
+              <%elsif booking.status == "confirmed"%>
+              <span class="badge rounded-pill py-2 px-3 text-bg-primary">
+                Confirmed
+              </span>
+            <%end%>
           </td>
           <td class="align-middle">
             <div class="d-flex align-items-center flex-wrap gap-2">
-              <%# if booking.status === 'draft' %>
+              <% if booking.status == 'draft' %>
               <a
-                href="<%#= confirm_booking_path(booking)%>"
+                href="<%= update_booking_status_path(booking.id, status: "confirmed") %>"
                 class="btn btn-primary"
                 data-remote="true"
               >
                 Confirm
               </a>
-              <%# end %> 
-              <%# if (booking.status !== 'cancelled' || booking.status
-              !== 'completed') %>
+              <%end%>
+              <% if booking.status == 'confirmed' %>
+                <a
+                  href="<%= update_booking_status_path(booking.id, status: "completed")%>"
+                  class="btn btn-success"
+                  data-remote="true"
+                >
+                  Complete
+                </a>
+              <% end %>
+              <% if (booking.status != 'cancelled') %>
               <a
-                href="<%#= cancel_booking_path(booking)%>"
+                href="<%= update_booking_status_path(booking.id, status: "cancelled") %>"
                 class="btn btn-danger"
                 data-remote="true"
               >
                 Cancel
               </a>
-              <%# end %>
+              <% end %>
             </div>
           </td>
         </tr>
-        <%#end%>
+        <%end%>
       </tbody>
     </table>
   </div>
-  <%# else %>
+  <% else %>
   <div class="bg-white p-4 border rounded">No Booking currently exists.</div>
-  <%# end %>
+  <% end %>
 </div>

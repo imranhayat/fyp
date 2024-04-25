@@ -1,5 +1,5 @@
 <div class="container-xl py-4">
-  <h4>All Users</h4>
+  <h4>All <%= current_user.school? ? "Instructors" : "Users" %></h4>
   <% if @users.present? %>
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -11,7 +11,9 @@
             <th>Phone number</th>
             <th>Address</th>
             <th>Picture</th>
-            <th>Fitness Certificate</th>
+            <% if current_user.school? %>
+              <th>Fitness Certificate</th>
+            <%end%>
             <th>Actions</th>
           </tr>
         </thead>
@@ -23,8 +25,10 @@
               <td class="align-middle"><%= user.email %></td>
               <td class="align-middle"><%= user.phone_number %></td>
               <td class="align-middle"><%= user.address %></td>
-              <td class="align-middle"><img src="<%=  url_for(user.picture) %>" class="custom-image"  /></td>
-              <td class="align-middle"><img src="<%=  url_for(user.fitness_certificate) %>" class="custom-image" /></td>
+              <td class="align-middle"><img src="<%=  user.picture.attached? ? url_for(user.picture) : "https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg" %>" class="custom-image"  /></td>
+              <% if user.instructor? %>
+                <td class="align-middle"><img src="<%=  user.fitness_certificate.attached? ? url_for(user.fitness_certificate) : "" %>" class="custom-image" /></td>
+              <%end%>
               <td class="align-middle">
                 <% unless user.approved %>
                   <a href="<%= approve_user_path(user)%>" class="btn btn-primary" data-remote="true">Approve</a>
